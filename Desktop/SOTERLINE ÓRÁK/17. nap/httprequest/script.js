@@ -1,7 +1,7 @@
 const state = {
     teendok : [],
     szures:{
-        userId:"3",
+        userId:"",
         title:"",
         completed:null
     },
@@ -38,13 +38,13 @@ function render(){
 function loadDoc(){
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
-        console.log('Státusz: ', xhttp.readyState, "; ", xhttp.status)
+        console.log("Státusz: ", xhttp.readyState, "; ", xhttp.status)
         if(xhttp.readyState==4 && xhttp.status==200)
         {
             // console.log('kész');
             console.log(xhttp.responseText);
         }else{
-            state = isPending = true;
+            state.isPending = true;
             console.log('töltődik...', this.readyState);
         };
     };
@@ -56,17 +56,17 @@ function loadDoc(){
     };
     xhttp.onerror = function(){
         console.log("Hiba: ", xhttp.status);
-    }
+    };
     xhttp.onload = function(){
         if(xhttp.status==200){
             state.teendok=JSON.parse(this.responseText);
             console.log(state.teendok);
-            state.isPending=true;
+            state.isPending=false;
             szures();
             render();
         }
     }
 
-    xhttp.open("GET", 'https://jsonplaceholder.typicode.com/todos',true);
+    xhttp.open("GET", "https://jsonplaceholder.typicode.com/todos",true);
     xhttp.send();
 }; // loadDoc vége 

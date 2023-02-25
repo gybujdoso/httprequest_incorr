@@ -11,7 +11,7 @@ const state = {
 document.getElementById('loaddoc').onclick=loadDoc;
 document.getElementById('urlap').onsubmit=function(event){
     event.preventDefault();
-    state.szures.userId=event.target.elements.userId.value;
+    state.szures.userId=event.target.elements.userid.value;
     state.szures.title=event.target.elements.title.value;
     loadDoc();
 };
